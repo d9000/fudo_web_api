@@ -1,0 +1,1 @@
+TCP (Trasmission control portocol) es un protocolo que permite una trnasmisión de datos de forma que garantiza que los mismos son recibidos(el receptor emite un ack), en orden y segmentos, y de ser necesarios son retrasmitidos. 
