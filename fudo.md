@@ -1,0 +1,1 @@
+Fudo es una empresa latinoamericana que se especializa en brindar soluciones de gestión a distntos tipos de empresas del rubro gastronómico, como restaurantes y bares, proporcionando herramientas para la solución de la gestión de stock, pagos, pedidos tanto en los mismo locales como a través de aplicaciones de devivery de terceros como Uber Eats, PedidoYa y similares.
