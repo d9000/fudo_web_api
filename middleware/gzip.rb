@@ -10,8 +10,10 @@ class Gzip
     status, headers, body = @app.call(env)
 
     if env['HTTP_ACCEPT_ENCODING']&.include?('gzip')
+      compressed_body = compress(body.join)
       headers['Content-Encoding'] = 'gzip'
-      body = [compress(body.join)]
+      headers['Content-Length'] = compressed_body.bytesize.to_s
+      body = [compressed_body]
     end
 
     [status, headers, body]
@@ -22,7 +24,7 @@ class Gzip
   def compress(body)
     string_io = StringIO.new
     gzip_writer = Zlib::GzipWriter.new(string_io)
-    gzip_writer.write(body.join)
+    gzip_writer.write(body)
     gzip_writer.close
     string_io.string
   end
