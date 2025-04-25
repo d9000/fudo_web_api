@@ -22,6 +22,6 @@ class Authentication
   end
 
   def unauthorized_response
-    [401, { 'Content-Type' => 'application/json' }, [{ error: 'Unauthorized' }.to_json]]
+    [401, { 'content-type' => 'application/json' }, [{ error: 'Unauthorized' }.to_json]]
   end
 end
