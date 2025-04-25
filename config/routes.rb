@@ -28,9 +28,9 @@ module Routes
       products_endpoint = ProductsEndpoint.new
       products_endpoint.list(request, response)
     when ['GET', OPENAPI_PATH]
-      FileRender.render_file(response, OPENAPI_PATH, 'no-cache')
+      FileRender.v1_render(response, 'openapi.yaml', 'no-cache')
     when ['GET', AUTHORS_PATH]
-      FileRender.render_file(response, AUTHORS_PATH, 'max-age=86400')
+      FileRender.v1_render(response, 'AUTHORS', 'max-age=86400')
     else
       response.status = 404
       response.write({ error: 'Not Found' }.to_json)
