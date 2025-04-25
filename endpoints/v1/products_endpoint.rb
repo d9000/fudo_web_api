@@ -1,4 +1,4 @@
-require_relative '/entities/product.rb'
+require_relative '../../entities/product.rb'
 
 class ProductsEndpoint
   def initialize

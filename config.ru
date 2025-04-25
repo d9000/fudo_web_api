@@ -1,6 +1,6 @@
 require './app'
-require './middlewares/authentication'
-require './middlewares/gzip'
+require './middleware/authentication'
+require './middleware/gzip'
 
 use Authentication
 use Gzip

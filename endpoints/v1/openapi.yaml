@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: API de Productos
+  description: API para autenticación y manejo de productos, siguiendo la especificación de OpenAPI.
+  version: 1.0.0
+paths:
+  /v1/auth:
+    post:
+      summary: Autenticación de usuario
+      description: Autentica un usuario con nombre y contraseña.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+                  description: Nombre del usuario.
+                password:
+                  type: string
+                  description: Contraseña del usuario.
+      responses:
+        '200':
+          description: Autenticación exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: Token de autenticación.
+        '401':
+          description: Credenciales inválidas.
+  /v1/products:
+    post:
+      summary: Crear un producto de forma asíncronica
+      description: Crea un producto de manera asíncronica y devuelve un mensaje indicando que la creación está en progreso.
+      responses:
+        '200':
+          description: Creación iniciada exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Mensaje indicando que la creación del producto está en progreso.
+        '401':
+          description: No autenticado.
+    get:
+      summary: Listar productos
+      description: Devuelve una lista de productos disponibles.
+      responses:
+        '200':
+          description: Lista de productos obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: ID del producto.
+                    name:
+                      type: string
+                      description: Nombre del producto.
+        '401':
+          description: No autenticado.
+  /v1/openapi.yaml:
+    get:
+      summary: Obtener especificación OpenAPI
+      description: Devuelve el archivo de especificación OpenAPI.
+      responses:
+        '200':
+          description: Archivo OpenAPI devuelto exitosamente.
+          content:
+            text/yaml:
+              schema:
+                type: string
+      headers:
+        Cache-Control:
+          description: Este archivo no debe ser almacenado en caché por los clientes.
+          schema:
+            type: string
+  /v1/AUTHORS:
+    get:
+      summary: Obtener archivo AUTHORS
+      description: Devuelve el archivo estático AUTHORS con el nombre del autor.
+      responses:
+        '200':
+          description: Archivo AUTHORS devuelto exitosamente.
+          content:
+            text/plain:
+              schema:
+                type: string
+      headers:
+        Cache-Control:
+          description: Este archivo debe ser almacenado en caché por 24 horas.
+          schema:
+            type: string

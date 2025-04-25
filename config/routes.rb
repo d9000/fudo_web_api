@@ -1,4 +1,6 @@
 require_relative '../endpoints/v1/authentication_endpoint.rb'
+require_relative '../endpoints/v1/products_endpoint.rb'
+require_relative '../lib/file_render.rb'
 
 module Routes
   AUTH_PATH = '/v1/auth'.freeze
@@ -20,19 +22,21 @@ module Routes
       auth_endpoint = AuthenticationEndpoint.new
       auth_endpoint.authenticate(request, response)
     when ['POST', PRODUCTS_PATH]
-      # create a product
+      products_endpoint = ProductsEndpoint.new
+      products_endpoint.create(request, response)
     when ['GET', PRODUCTS_PATH]
-      # list of products
+      products_endpoint = ProductsEndpoint.new
+      products_endpoint.list(request, response)
     when ['GET', OPENAPI_PATH]
-      # renders openapi.yaml file
+      FileRender.render_file(response, OPENAPI_PATH, 'no-cache')
     when ['GET', AUTHORS_PATH]
-      # renders authors file
+      FileRender.render_file(response, AUTHORS_PATH, 'max-age=86400')
     else
       response.status = 404
       response.write({ error: 'Not Found' }.to_json)
     end
 
-    response['Content-Type'] = 'application/json'
+    response['content-type'] = 'application/json'
 
     response.finish
   end
