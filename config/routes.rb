@@ -1,3 +1,5 @@
+require_relative '../endpoints/v1/authentication_endpoint.rb'
+
 module Routes
   AUTH_PATH = '/v1/auth'.freeze
   PRODUCTS_PATH = '/v1/products'.freeze
@@ -15,6 +17,8 @@ module Routes
     case [request.request_method, request.path_info]
     when ['POST', AUTH_PATH]
       # authenticate user
+      auth_endpoint = AuthenticationEndpoint.new
+      auth_endpoint.authenticate(request, response)
     when ['POST', PRODUCTS_PATH]
       # create a product
     when ['GET', PRODUCTS_PATH]
