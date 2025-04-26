@@ -1,6 +1,6 @@
 require_relative '../config/routes'
 
-class Authentication
+class Authorization
   def initialize(app)
     @app = app
   end

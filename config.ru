@@ -1,7 +1,7 @@
 require './app'
-require './middleware/authentication'
+require './middleware/authorization'
 require './middleware/gzip'
 
-use Authentication
+use Authorization
 use Gzip
 run App.new
